@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import WaterTube from './components/WaterTube';
 import styled from 'styled-components';
@@ -12,7 +12,7 @@ const Container = styled.div`
 `;
 
 function App() {
-  const distinctColors = 6;
+  const distinctColors = 3;
   const emptyTubeCount = 2;
   const sectionCount = 4;
   const [initialValues, setInitialValues] = useState(generateLevel(distinctColors, sectionCount));
@@ -33,6 +33,12 @@ function App() {
     setTubeSet(tubeSet);
     setSelected(-1);
   }
+
+  useEffect(() => {
+    if(tubeSet.isSorted()) {
+      setTimeout(() => alert('Done!'));
+    }
+  }, [selected]);
 
   const resetClicked = () => {
     setTubeSet(new TubeSet(4, 5, initialValues));
