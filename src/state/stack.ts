@@ -4,9 +4,19 @@ export class Stack {
   size: number = 0;
   stack: Color[] = [];
   name: string = '';
-  constructor(size: number, name: string) {
+  constructor(size: number, name: string, initialValues?: Color[]) {
     this.size = size;
     this.name = name;
+    if(initialValues !== null && initialValues !== undefined && (initialValues.length === size || initialValues.length == 0) ) {
+      this.stack = [...initialValues];
+    }
+  }
+
+  public resetStack(colors: Color[]) {
+    if(colors === null || colors === undefined || (colors.length !== this.size && colors.length !== 0)) {
+      return;
+    }
+    this.stack = [...colors];
   }
   
   public pop() {

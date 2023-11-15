@@ -1,4 +1,4 @@
-import { Stack } from "../hooks/stack";
+import { Stack } from "../state/stack";
 
 export enum MergeResult {
   Success,
