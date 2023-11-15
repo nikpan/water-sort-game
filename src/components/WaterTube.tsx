@@ -16,6 +16,21 @@ export const enum Color {
   LIGHT_PINK = "LIGHT_PINK"
 }
 
+export const ColorList = [
+  Color.RED,
+  Color.BLUE,
+  Color.GRAY,
+  Color.ORANGE,
+  Color.YELLOW,
+  Color.GREEN,
+  Color.PINK,
+  Color.LIGHT_GREEN,
+  Color.LIGHT_BLUE,
+  Color.LIGHT_YELLOW,
+  Color.LIGHT_ORANGE,
+  Color.LIGHT_PINK
+]
+
 export interface WaterTubeProps {
   colors: Color[];
   onClick?: () => void;

@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './App.css';
-import WaterTube, { Color } from './components/WaterTube';
+import WaterTube from './components/WaterTube';
 import styled from 'styled-components';
 import mergeStacks from './actions/mergeStacks';
 import TubeSet from './state/tubeSet';
+import { generateLevel } from './util/levelGenerator';
 
 const Container = styled.div`
   display: flex;
@@ -11,14 +12,11 @@ const Container = styled.div`
 `;
 
 function App() {
-  const initialValues = [
-    [Color.BLUE, Color.RED, Color.BLUE, Color.YELLOW],
-    [Color.BLUE, Color.BLUE, Color.RED, Color.YELLOW],
-    [Color.YELLOW, Color.YELLOW, Color.RED, Color.RED],
-    [],
-    []
-  ]
-  const [tubeSet, setTubeSet] = useState(new TubeSet(4, 5, initialValues))
+  const distinctColors = 6;
+  const emptyTubeCount = 2;
+  const sectionCount = 4;
+  const [initialValues, setInitialValues] = useState(generateLevel(distinctColors, sectionCount));
+  const [tubeSet, setTubeSet] = useState(new TubeSet(sectionCount, distinctColors + emptyTubeCount, initialValues))
   const [selected, setSelected] = useState(-1);
 
   const tubeClicked = (index: number) => {
@@ -41,9 +39,16 @@ function App() {
     setSelected(-1);
   }
 
+  const generateLevelClicked = () => {
+    setInitialValues(generateLevel(distinctColors, sectionCount));
+    setTubeSet(new TubeSet(sectionCount, distinctColors + emptyTubeCount, initialValues));
+    setSelected(-1);
+  }
+
   return (
     <>
       <button onClick={resetClicked}>Reset</button>
+      <button onClick={generateLevelClicked}>Generate New Level</button>
       <Container>
         {tubeSet.tubes.map((tube, i) => (
           <WaterTube onClick={() => tubeClicked(i)} selected={selected === i} colors={tube.stack} />
