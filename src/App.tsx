@@ -12,7 +12,7 @@ const Container = styled.div`
 `;
 
 function App() {
-  const distinctColors = 3;
+  const distinctColors = 6;
   const emptyTubeCount = 2;
   const sectionCount = 4;
   const [initialValues, setInitialValues] = useState(generateLevel(distinctColors, sectionCount));
